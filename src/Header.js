@@ -1,7 +1,7 @@
 import React from 'react';
 import { cloneDeep } from 'lodash';
 
-function Header({ end , setEnd, data, setData, score, setScore }) {
+function Header({ restart, setRestart, data, setData, score, setScore, best }) {
 	const handlenewGame = () => {
 		let newData = cloneDeep(data);
 		newData = [
@@ -11,8 +11,11 @@ function Header({ end , setEnd, data, setData, score, setScore }) {
 			[0, 0, 0, 0],
 		];
 		setData(newData);
+		if (localStorage.getItem('best') < score)
+			localStorage.setItem('best', score);
 		setScore(0);
-		setEnd({...end , end : !end});
+		setRestart({ restart, restart: !restart });
+		// setEnd({...end , end : !end});
 	};
 	return (
 		<div className="Header">
@@ -27,7 +30,7 @@ function Header({ end , setEnd, data, setData, score, setScore }) {
 					</div>
 					<div className="Header_BestScore">
 						<div className="Header_score">BEST </div>
-						1023
+						{localStorage.getItem('best') ? localStorage.getItem('best') : 0}
 					</div>
 				</div>
 			</div>

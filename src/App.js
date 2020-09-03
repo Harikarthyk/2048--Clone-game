@@ -10,8 +10,11 @@ const App = () => {
 	const DOWN_ARROW = 40;
 	const LEFT_ARROW = 37;
 	const RIGHT_ARROW = 39;
-	const [end, setEnd] = useState(true);
+	const [restart, setRestart] = useState(false);
+	const [stop, setStop] = useState(true);
 	const [score, setScore] = useState(0);
+	// const[]
+	const [best, setBest] = useState(0);
 	const [data, setData] = useState([
 		[0, 0, 0, 0],
 		[0, 0, 0, 0],
@@ -167,7 +170,7 @@ const App = () => {
 					if (newData[f][i] === newData[s][i]) {
 						newData[s][i] += newData[f][i];
 						newData[f][i] = 0;
-						let temp = score + newData[s][i];
+						setScore(score + newData[s][i]);
 					}
 					s--;
 					f = s - 1;
@@ -196,38 +199,17 @@ const App = () => {
 		}
 	};
 	const checkEnd = () => {
-		if (!end) return;
+		if (!stop) return;
+
 		for (let i = 0; i < 4; i++) {
 			for (let j = 0; j < 4; j++) {
-				try {
-					if (!data[i][j]) return true;
-					if (i === 0 || j === 0) {
-						if (data[i][j] === data[i + 1][j] || data[i][j] === data[i][j + 1])
-							return true;
-					} else if (i === 3 || j !== 3) {
-						if (
-							data[i][j] === data[i + 1][j] ||
-							data[i][j] === data[i][j + 1] ||
-							data[i][j] === data[i][j - 1]
-						)
-							return true;
-					} else if (j === 3) {
-						if (data[i][j] === data[i - 1][j] || data[i][j] === data[i][j - 1])
-							return true;
-					} else if (
-						data[i][j] === data[i - 1][j] ||
-						data[i][j] === data[i + 1][j] ||
-						data[i][j] === data[i][j + 1] ||
-						data[i][j] === data[i][j - 1]
-					) {
-						return true;
-					}
-				} catch (error) {
-					alert('Game Catch Over');
-					return;
-				}
+				if (i - 1 >= 0 && data[i][j] === data[i - 1][j]) return true;
+				if (i + 1 <= 3 && data[i][j] === data[i + 1][j]) return true;
+				if (j - 1 >= 0 && data[i][j] === data[i][j - 1]) return true;
+				if (j + 1 <= 3 && data[i][j] === data[i][j + 1]) return true;
 			}
 		}
+		setStop(false);
 		return false;
 	};
 	const checkPosibility = () => {
@@ -238,12 +220,19 @@ const App = () => {
 		return false;
 	};
 	const addNumber = (newData) => {
-		if (!end) return;
+		if (!stop) {
+			if (localStorage.getItem('best') < score) {
+				localStorage.setItem('best', score);
+			}
+			return;
+		}
 		if (!checkPosibility()) {
 			if (!checkEnd()) {
 				alert('Game Over');
-
-				setEnd({ ...end, end: false });
+				setStop(false);
+				if (localStorage.setItem('best', score) < score) {
+					localStorage.setItem('best', score);
+				}
 				return;
 			}
 			return;
@@ -259,26 +248,36 @@ const App = () => {
 	};
 	const initializeBoard = () => {
 		let newData = cloneDeep(data);
+		setStop(true);
 		addNumber(newData);
 		addNumber(newData);
 		setData(newData);
 	};
 	useEffect(() => {
-		// setEnd(false);
+		if (localStorage.getItem('best')) {
+			setBest({ ...best, best: localStorage.getItem('best') });
+		} else localStorage.setItem('best', 0);
+
 		initializeBoard();
-	}, [end]);
+	}, [restart]);
 
 	useEvent('keydown', handleKeys);
 	return (
 		<div className="App">
 			<Header
-				end={end}
-				setEnd={setEnd}
+				restart={restart}
+				setRestart={setRestart}
 				data={data}
 				setData={setData}
 				score={score}
 				setScore={setScore}
 			/>
+
+			{!stop ? (
+				<div className="App_end">Your Score {score} Game Over...</div>
+			) : (
+				''
+			)}
 			<Board data={data} />
 		</div>
 	);
