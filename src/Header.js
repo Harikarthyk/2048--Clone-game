@@ -1,7 +1,7 @@
 import React from 'react';
 import { cloneDeep } from 'lodash';
 
-function Header({ restart, setRestart, data, setData, score, setScore, best }) {
+function Header({ restart, setRestart, data, setData, score, setScore }) {
 	const handlenewGame = () => {
 		let newData = cloneDeep(data);
 		newData = [
@@ -15,7 +15,6 @@ function Header({ restart, setRestart, data, setData, score, setScore, best }) {
 			localStorage.setItem('best', score);
 		setScore(0);
 		setRestart({ restart, restart: !restart });
-		// setEnd({...end , end : !end});
 	};
 	return (
 		<div className="Header">
