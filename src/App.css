@@ -1,38 +1,121 @@
 .App {
-  text-align: center;
+	font-family: sans-serif;
+	text-align: center;
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+.Board {
+	margin: auto;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #bbada0;
+}
+body {
+	background-color: #faf8ef;
+}
+.Board_box {
+	height: 80px;
+	width: 100%;
+	display: flex;
+	margin: 5px;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+	margin-right: 10px;
+	transition: all 160ms cubic-bezier(1, 0.72, 0.99, 0.73) 0s;
+	font-size: 40px;
+	border-radius: 5px;
+	color: white;
+	background: rgb(205, 193, 180);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Header_title_container {
+	display: flex;
+	flex-direction: row;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Header_left {
+	font-size: 100px;
+	flex: 1;
+	color: #8f7a66;
+	text-align: left;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.Header_right {
+	display: flex;
+	align-items: center;
+	flex: 0.6;
+	align-items: center;
+	justify-content: flex-end;
 }
 
-.App-link {
-  color: #61dafb;
+.Header_score {
+	flex: 1;
+	background: #bbada0;
+	padding: 4px;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: 700;
+	margin-right: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Header_BestScore {
+	flex: 1;
+	background: #bbada0;
+	padding: 4px;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: 700;
+}
+
+.Header_rules {
+	display: flex;
+	margin: 15px 0;
+}
+
+.Header_rules_left {
+	flex: 1;
+	text-align: initial;
+	display: flex;
+	align-items: center;
+	color: #bbada0;
+	font-weight: 700;
+	font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+	font-size: 18px;
+}
+.Header_rules_right {
+	background: #8f7a66;
+	padding: 7px;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: 700;
+	margin-right: 5px;
+	display: flex;
+	align-items: center;
+}
+@media screen and (max-width: 520px) {
+	.Board_box {
+		width: 100%;
+		height: 57.5px;
+		margin-right: 8px;
+		float: left;
+		font-size: 25px;
+		border-radius: 3px;
+		background: rgba(238, 228, 218, 0.35);
+	}
+	.App {
+		width: 260px;
+		margin: auto;
+		margin-top: 30px;
+	}
+	.Header_left {
+		font-size: 40px;
+		flex: 1;
+		display: flex;
+
+		align-items: center;
+		color: #8f7a66;
+		text-align: left;
+	}
 }
