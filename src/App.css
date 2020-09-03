@@ -34,10 +34,16 @@ body {
 	display: flex;
 	flex-direction: row;
 }
+.score_text {
+	font-family: 'Bebas Neue', cursive;
+	font-weight: 700;
+	font-size: x-large;
+}
 
 .Header_left {
 	font-size: 100px;
 	flex: 1;
+	font-family: 'Bebas Neue', cursive;
 	color: #8f7a66;
 	text-align: left;
 }
@@ -56,7 +62,6 @@ body {
 	padding: 4px;
 	border-radius: 5px;
 	color: #fff;
-	font-weight: 700;
 	margin-right: 5px;
 }
 
@@ -66,7 +71,6 @@ body {
 	padding: 4px;
 	border-radius: 5px;
 	color: #fff;
-	font-weight: 700;
 }
 
 .Header_rules {
@@ -91,8 +95,17 @@ body {
 	color: #fff;
 	font-weight: 700;
 	margin-right: 5px;
+	cursor: pointer;
 	display: flex;
 	align-items: center;
+}
+.App_end {
+	margin: 20px 0;
+	font-size: unset;
+	font-family: 'Poppins', sans-serif;
+}
+.keybord {
+	display: none;
 }
 @media screen and (max-width: 520px) {
 	.Board_box {
@@ -113,9 +126,28 @@ body {
 		font-size: 40px;
 		flex: 1;
 		display: flex;
-
 		align-items: center;
 		color: #8f7a66;
 		text-align: left;
+	}
+	.keyboard_col2 {
+		display: flex;
+		justify-content: center;
+	}
+
+	.keyboard_left {
+		flex: 1;
+	}
+
+	.keyboard_right {
+		flex: 1;
+	}
+
+	.keybord {
+		display: block;
+		font-size: -webkit-xxx-large;
+		color: #8f7a66;
+		cursor: pointer;
+		margin: 20px 0;
 	}
 }

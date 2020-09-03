@@ -14,7 +14,7 @@ function Header({ restart, setRestart, data, setData, score, setScore }) {
 		if (localStorage.getItem('best') < score)
 			localStorage.setItem('best', score);
 		setScore(0);
-		setRestart({ restart, restart: !restart });
+		setRestart(!restart);
 	};
 	return (
 		<div className="Header">
@@ -25,11 +25,13 @@ function Header({ restart, setRestart, data, setData, score, setScore }) {
 				<div className="Header_right">
 					<div className="Header_score">
 						<div className="Header_score"> SCORE</div>
-						{score}
+						<div className="score_text">{score}</div>
 					</div>
 					<div className="Header_BestScore">
 						<div className="Header_score">BEST </div>
-						{localStorage.getItem('best') ? localStorage.getItem('best') : 0}
+						<div className="score_text">
+							{localStorage.getItem('best') ? localStorage.getItem('best') : 0}
+						</div>
 					</div>
 				</div>
 			</div>

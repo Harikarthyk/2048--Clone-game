@@ -4,6 +4,12 @@ import { cloneDeep } from 'lodash';
 import { useEvent } from './keyEvents';
 import Board from './Board';
 import Header from './Header';
+import {
+	FaCaretDown,
+	FaCaretLeft,
+	FaCaretRight,
+	FaCaretUp,
+} from 'react-icons/fa';
 
 const App = () => {
 	const UP_ARROW = 38;
@@ -13,7 +19,6 @@ const App = () => {
 	const [restart, setRestart] = useState(false);
 	const [stop, setStop] = useState(true);
 	const [score, setScore] = useState(0);
-	// const[]
 	const [best, setBest] = useState(0);
 	const [data, setData] = useState([
 		[0, 0, 0, 0],
@@ -69,11 +74,6 @@ const App = () => {
 			let f = 2;
 			let currRow = newData[i];
 			while (s >= 0 && f >= 0) {
-				// if (f === 0) {
-				// 	s--;
-				// 	f = s - 1;
-				// 	continue;
-				// }
 				if (
 					(currRow[s] === 0 && currRow[f] === 0) ||
 					(currRow[s] !== 0 && currRow[f] === 0)
@@ -108,11 +108,6 @@ const App = () => {
 			let s = 0;
 			let f = 1;
 			while (s < 4 && f < 4) {
-				// if (f === 4) {
-				// 	s++;
-				// 	f = s + 1;
-				// 	continue;
-				// }
 				if (
 					(newData[s][i] === 0 && newData[f][i] === 0) ||
 					(newData[s][i] !== 0 && newData[f][i] === 0)
@@ -147,12 +142,6 @@ const App = () => {
 			let s = 3;
 			let f = 2;
 			while (s >= 0 && f >= 0) {
-				// if (f === 0) {
-				// 	s--;
-				// 	f = s - 1;
-
-				// 	continue;
-				// }
 				if (
 					(newData[s][i] === 0 && newData[f][i] === 0) ||
 					(newData[s][i] !== 0 && newData[f][i] === 0)
@@ -198,6 +187,7 @@ const App = () => {
 			default:
 		}
 	};
+
 	const checkEnd = () => {
 		if (!stop) return;
 
@@ -257,7 +247,6 @@ const App = () => {
 		if (localStorage.getItem('best')) {
 			setBest({ ...best, best: localStorage.getItem('best') });
 		} else localStorage.setItem('best', 0);
-
 		initializeBoard();
 	}, [restart]);
 
@@ -279,6 +268,60 @@ const App = () => {
 				''
 			)}
 			<Board data={data} />
+			<div className="keybord">
+				<div className="keyboard_col1">
+					<div
+						className="keyboard_up"
+						onClick={() => {
+							let temp = {
+								keyCode: 38,
+							};
+							handleKeys(temp);
+						}}
+					>
+						<FaCaretUp />
+					</div>
+				</div>
+
+				<div className="keyboard_col2">
+					<div
+						className="keyboard_left"
+						onClick={() => {
+							let temp = {
+								keyCode: 37,
+							};
+							handleKeys(temp);
+						}}
+					>
+						<FaCaretLeft />
+					</div>
+					<div
+						className="keyboard_right"
+						onClick={() => {
+							let temp = {
+								keyCode: 39,
+							};
+							handleKeys(temp);
+						}}
+					>
+						<FaCaretRight />
+					</div>
+				</div>
+
+				<div className="keyboard_col3">
+					<div
+						className="keyboard_down"
+						onClick={() => {
+							let temp = {
+								keyCode: 40,
+							};
+							handleKeys(temp);
+						}}
+					>
+						<FaCaretDown />
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };
